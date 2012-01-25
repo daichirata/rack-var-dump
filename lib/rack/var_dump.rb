@@ -35,8 +35,8 @@ module Rack
         response.each {|org_body| body << org_body}
         response = [apply(request, body)] if body.include? "<body>"
         headers["Content-Length"] = response.join.length.to_s
-        VarDump.reset!
       end
+      VarDump.reset!
       [status, headers, response]
     end
 
