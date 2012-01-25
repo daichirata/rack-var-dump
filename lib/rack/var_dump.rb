@@ -1,4 +1,4 @@
-require 'rack/object'
+require File.expand_path(File.join(File.dirname(__FILE__), 'object'))
 
 module Rack
   include Object
@@ -33,8 +33,8 @@ module Rack
       if /^text\/html/ =~ headers["Content-Type"] && !@@var_aggregates.empty?
         body = ""
         response.each {|org_body| body << org_body}
-        response = [apply(request, body)] if body.include? "<body>"
-        headers["Content-Length"] = response.join.length.to_s
+        response = [apply(request, body)] if body =~ /<body.*>/
+        headers["Content-Length"] = response.join.bytesize.to_s
       end
       VarDump.reset!
       [status, headers, response]
@@ -44,9 +44,9 @@ module Rack
     def apply(request, response)
       html =  %Q(<div id="var_dump" style="display:block">)
       html << %Q(<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;">)
-      html << @@var_aggregates.compact.join("/n")
+      html << Rack::Utils.escape_html(@@var_aggregates.join)
       html << %Q(</pre></div>)
-      response.insert(response.index("<body>"), html)
+      response.sub(/<body.*>/, '\&' + html)
     end
   end
 end
