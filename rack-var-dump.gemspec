@@ -5,10 +5,10 @@ require "rack/var_dump/version"
 Gem::Specification.new do |s|
   s.name        = "rack-var-dump"
   s.version     = Rack::VarDump::VERSION
-  s.authors     = ["Dach-h"]
+  s.authors     = ["Dach_h"]
   s.email       = ["bunny.hop.md@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{It is provided the method similar to var_dump() of php.}
+  s.summary     = %q{rack-var-dump provides a method for debugging like var_dump() of php.}
   s.description = s.summary
   s.rubyforge_project = "rack-var-dump"
   s.files         = `git ls-files`.split("\n")

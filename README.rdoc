@@ -7,7 +7,7 @@ rack-var-dump provides a method for debugging like var_dump() of php.
 
 By the time it provides Object Class with a var_dump method and returns a response, they are Model, Controller, and View,
 
-All the receivers performed by others or the given argument is automatically outputted to view.
+All the receivers performed by others or the given argument is automatically outputted to View.
 
 == Supported versions
 
