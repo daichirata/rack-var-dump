@@ -1,9 +1,11 @@
-require File.expand_path(File.join(File.dirname(__FILE__), 'object'))
+require "rack/utils"
+require "rack/var_dump/object"
+require "rack/var_dump/version"
 
 module Rack
-  include Object
-
   class VarDump
+    include Object
+
     @@var_aggregates = []
 
     def self.var_dump(var)

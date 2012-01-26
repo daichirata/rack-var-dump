@@ -1,9 +1,12 @@
 require 'rails'
-require 'rack/object'
+require 'rack/var_dump'
+require 'rack/var_dump/object'
+require 'rack/var_dump/version'
 
 module Rack
-  autoload :VarDump, "rack/var_dump"
-  include Object
+  class VarDump
+    include Object
+  end
 
   class Railtie < Rails::Railtie
     initializer "rack_var_dump.use_middleware" do |app|
