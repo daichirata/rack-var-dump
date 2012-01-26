@@ -1,0 +1,57 @@
+= rack-var-dump
+
+rack-var-dumpはphpのvar_dump()のようなデバッグ用のメソッドを提供します
+
+Object Classにvar_dumpメソッドを提供し、レスポンスを返すまでにModel,Controller,View,
+
+その他で実行されたすべてのレシーバーもしくは与えた引数をviewに自動的に出力します
+
+var_dumpの返り値は常にselfです
+
+== Supported versions
+
+* Ruby 1.8.7, 1.9.x
+
+* Rackを利用しているアプリケーション全般 (rails, sinatra, padrino, etc...)
+
+== Install
+
+  $ gem install rack-var-dump
+
+=== Rails
+
+Gemfileに追加
+  gem 'rack-var-dump'
+
+Bundle Install
+  % bundle install
+
+=== Rails3.x以上の場合
+
+config/application.rb等でRails用に用意されている
+  require 'rails-var-dump'
+をrequire
+
+=== その他Rackアプリケーション
+
+rack/var_dumpをrequire
+  require 'rack/var_dump'
+
+Rack::VarDumpミドルウェアをuse
+  use Rack::VarDump
+
+== 使い方
+
+rails-var-dumpもしくはrack/var_dumpをrequireしている場合、全てのオブジェクトに
+  var_dump(var = nil)
+が提供されています
+
+=== 例
+  @users = User.all.var_dump
+  var_dump(@users)
+
+var_dumpの返り値は常にselfのため、チェーンが途切れずに使用できます
+  @first_name = User.find(3).var_dump.first_name
+
+
+書きかけ
