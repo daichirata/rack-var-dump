@@ -45,7 +45,7 @@ module Rack
     private
     def apply(request, response)
       html =  %Q(<div id="var_dump" style="display:block">)
-      html << %Q(<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;">)
+      html << %Q(<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;color:black !important;">)
       html << Rack::Utils.escape_html(@@var_aggregates.join)
       html << %Q(</pre></div>)
       response.sub(/<body.*>/, '\&' + html)
