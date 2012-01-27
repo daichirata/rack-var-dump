@@ -10,6 +10,8 @@ Object Classにvar_dumpメソッドを提供し、レスポンスを返すまで
 
 var_dumpの返り値は常にselfです
 
+http://cdn-ak.f.st-hatena.com/images/fotolife/b/bunnyhop/20120127/20120127235528.png
+
 == Supported versions
 
 * Ruby 1.8.7, 1.9.x
