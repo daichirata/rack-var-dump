@@ -1,75 +1,12 @@
 (書きかけ)
 
-
-= rack-var-dump
-
-rack-var-dump provides a method for debugging like var_dump() of php.
-
-By the time it provides Object Class with a var_dump method and returns a response, they are Model, Controller, and View,
-
-All the receivers performed by others or the given argument is automatically outputted to View.
-
-== Supported versions
-
-* Ruby 1.8.7, 1.9.x
-
-* Using Rack (rails, sinatra, padrino, etc...)
-
-== Install
-
-  $ gem install rack-var-dump
-
-=== Rails
-
-Put this line in your Gemfile:
-  gem 'rack-var-dump'
-
-Bundle Install
-  % bundle install
-
-=== Rails3.x
-
-Put this line in your config/application.rb
-  require 'rails-var-dump'
-
-=== Others application using Rack
-
-Require rack/var_dump.
-  require 'rack/var_dump'
-
-Please use Rack::VarDump
-  use Rack::VarDump
-
-== How to use
-
-When requiring rails-var-dump or rack/var_dump,
-
-all the objects are provided with
-
-  var_dump (var = nil).
-
-=== e.g.
-  @users = User.all.var_dump
-  var_dump(@users)
-
-The return value of var_dump can always be used for self,
-
-without a chain breaking off.
-
-  @first_name = User.find(3).var_dump.first_name
-
-== Copyright
-
-Copyright (c) 2012 Daichi Hirata. See LICENSE for details.
-
-
 = Japanese
 
 rack-var-dumpはphpのvar_dump()のようなデバッグ用のメソッドを提供します
 
 Object Classにvar_dumpメソッドを提供し、レスポンスを返すまでにModel,Controller,View,
 
-その他で実行されたすべてのレシーバーもしくは与えた引数をviewに自動的に出力します
+その他で実行されたすべてのレシーバーをviewに自動的に出力します
 
 var_dumpの返り値は常にselfです
 
@@ -108,15 +45,15 @@ Rack::VarDumpミドルウェアをuse
 == 使い方
 
 rails-var-dumpもしくはrack/var_dumpをrequireしている場合、全てのオブジェクトに
-  var_dump(var = nil)
+  var_dump(subject = nil)
 が提供されています
 
 === 例
   @users = User.all.var_dump
-  var_dump(@users)
+  @users.var_dump("user.all")
 
 var_dumpの返り値は常にselfのため、チェーンが途切れずに使用できます
-  @first_name = User.find(3).var_dump.first_name
+  @first_name = User.find(3).var_dump('user.id(3)').first_name
 
 
 == Copyright
