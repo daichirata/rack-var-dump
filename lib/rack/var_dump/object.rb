@@ -8,8 +8,8 @@ module Rack
     end
 
     module Method
-      def var_dump(var = nil)
-        Rack::VarDump.var_dump(var || self)
+      def var_dump(subject = nil)
+        Rack::VarDump.var_dump(self, subject)
         self
       end
     end

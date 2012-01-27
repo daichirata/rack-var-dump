@@ -8,16 +8,8 @@ module Rack
 
     @@var_aggregates = []
 
-    def self.var_dump(var)
-      @@var_aggregates << var.to_yaml
-    rescue => e
-      if defined?(Rails)
-        ::Rails.logger.warn "Rack::VarDump[warn] #{e}"
-      end
-
-      if var.respond_to?(:inspect)
-        @@var_aggregates << var.inspect
-      end
+    def self.var_dump(var, subject)
+      @@var_aggregates << {:var => var.inspect, :subject => subject}
     end
 
     def self.reset!
@@ -26,6 +18,7 @@ module Rack
 
     def initialize(app)
       @app = app
+      VarDump.reset!
     end
 
     def call(env)
@@ -44,10 +37,14 @@ module Rack
 
     private
     def apply(request, response)
-      html =  %Q(<div id="var_dump" style="display:block">)
-      html << %Q(<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;color:black !important;">)
-      html << Rack::Utils.escape_html(@@var_aggregates.join)
-      html << %Q(</pre></div>)
+      html =  '<div id="var_dump" style="display:block">'
+      html << '<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;color:black!important;">'
+      @@var_aggregates.each_with_index do |info, n|
+        html << "var_dump:#{n} #{info[:subject]}\n"
+        html << Rack::Utils.escape_html(info[:var])
+        html << "\n\n"
+      end
+      html << "</pre></div>"
       response.sub(/<body.*>/, '\&' + html)
     end
   end
