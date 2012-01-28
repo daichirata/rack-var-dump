@@ -28,7 +28,7 @@ module Rack
       if /^text\/html/ =~ headers["Content-Type"] && !@@var_aggregates.empty?
         body = ""
         response.each {|org_body| body << org_body}
-        response = [apply(request, body)] if body =~ /<body.*>/
+        response = [apply(body)] if body =~ /<body.*>/
         headers["Content-Length"] = response.join.bytesize.to_s
       end
       VarDump.reset!
@@ -36,7 +36,7 @@ module Rack
     end
 
     private
-    def apply(request, response)
+    def apply(body)
       html =  '<div id="var_dump" style="display:block">'
       html << '<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;color:black!important;">'
       @@var_aggregates.each_with_index do |info, n|
@@ -45,7 +45,7 @@ module Rack
         html << "\n\n"
       end
       html << "</pre></div>"
-      response.sub(/<body.*>/, '\&' + html)
+      body.sub(/<body.*>/, '\&' + html)
     end
   end
 end
