@@ -18,14 +18,14 @@ module Rack
 
     def initialize(app)
       @app = app
-      VarDump.reset!
     end
 
     def call(env)
       request = Rack::Request.new(env)
       status, headers, response = @app.call(env)
 
-      if /^text\/html/ =~ headers["Content-Type"] && !@@var_aggregates.empty?
+      if headers["Content-Type"] =~ /^text\/html/ &&
+          !@@var_aggregates.empty? && status == 200
         body = ""
         response.each {|org_body| body << org_body}
         response = [apply(body)] if body =~ /<body.*>/
