@@ -24,8 +24,7 @@ module Rack
       request = Rack::Request.new(env)
       status, headers, response = @app.call(env)
 
-      if headers["Content-Type"] =~ /^text\/html/ &&
-          !@@var_aggregates.empty? && status == 200
+      if headers["Content-Type"] =~ /^text\/html/ && !@@var_aggregates.empty?
         body = ""
         response.each {|org_body| body << org_body}
         response = [apply(body)] if body =~ /<body.*>/

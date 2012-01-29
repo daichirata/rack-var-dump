@@ -14,11 +14,6 @@ describe 'VarDump' do
       last_response.body.should include(insert_html)
     end
 
-    it "It is not inserted when a status code is not 200." do
-      get '/404'
-      last_response.body.should_not include(insert_html)
-    end
-
     it "It is not inserted when a contents type is not text/html. " do
       get '/image.jpg'
       last_response.body.should_not include(insert_html)

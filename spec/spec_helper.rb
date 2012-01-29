@@ -17,8 +17,6 @@ class TestRackApp
     case env['PATH_INFO']
     when '/'
       [200, {"Content-Type" => "text/html"}, [DummyBody]]
-    when '/404'
-      [404, {"Content-Type" => "image/ipg"}, [DummyBody]]
     when '/image.jpg'
       [200, {"Content-Type" => "image/ipg"}, [DummyBody]]
     end
