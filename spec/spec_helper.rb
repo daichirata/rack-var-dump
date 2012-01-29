@@ -3,16 +3,16 @@ $:.unshift(File.dirname(__FILE__))
 
 %w(rubygems rack rack/test rack/var_dump rspec).each {|f| require f}
 
-class TestRackApp
-  DummyBody = <<-EOH
-  <html>
-    <head></head>
-      <body>
-        <p>Dummy Rack!"</p>
-      </body>
-    </html>
-  EOH
+DummyBody = <<-EOH
+<html>
+  <head></head>
+    <body>
+      <p>Dummy Rack!</p>
+    </body>
+  </html>
+EOH
 
+class TestRackApp
   def call(env)
     case env['PATH_INFO']
     when '/'
