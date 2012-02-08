@@ -1,15 +1,23 @@
 require "rack/utils"
+require 'rack/var_dump/awesome_print'
 require "rack/var_dump/object"
 require "rack/var_dump/version"
 
 module Rack
   class VarDump
-    include Object
-
     @@var_aggregates = []
 
+    def self.ai(var, options = {})
+      ap = AwesomePrint::Inspector.new(options)
+      ap.instance_eval do
+        formatter = AwesomePrint::VarDumpFormatter.new(self)
+        instance_variable_set(:@formatter, formatter)
+      end
+      ap.awesome var
+    end
+
     def self.var_dump(var, subject)
-      @@var_aggregates << {:var => var.inspect, :subject => subject}
+      @@var_aggregates << {:var => ai(var), :subject => subject}
     end
 
     def self.reset!
@@ -40,7 +48,7 @@ module Rack
       html << '<pre style="background-color:#eee;padding:10px;font-size:11px;white-space:pre-wrap;color:black!important;">'
       @@var_aggregates.each_with_index do |info, n|
         html << "var_dump:#{n} #{info[:subject]}\n"
-        html << Rack::Utils.escape_html(info[:var])
+        html << info[:var]
         html << "\n\n"
       end
       html << "</pre></div>"
