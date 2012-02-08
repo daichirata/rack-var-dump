@@ -16,7 +16,7 @@ Objectにvar_dumpメソッドを提供し、Rackがレスポンスを返すま�
 
 出力には michaeldv / awesome_print を使用しています。
 
-<img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bunnyhop/20120208/20120208182805.png"/>
+<img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bunnyhop/20120208/20120208183913.png"/>
 
 ## Supported versions
 
