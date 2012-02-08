@@ -1,7 +1,7 @@
 require "rack/utils"
+require 'rack/var_dump/kernel'
+require 'rack/var_dump/version'
 require 'rack/var_dump/awesome_print'
-require "rack/var_dump/object"
-require "rack/var_dump/version"
 
 module Rack
   class VarDump

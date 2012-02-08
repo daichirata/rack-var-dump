@@ -1,1 +1,1 @@
-require 'rack/railtie' if defined?(Rails)
+require 'rails-var-dump'
