@@ -1,0 +1,21 @@
+module AwesomePrint
+  module VarDump
+    def self.included(base)
+      base.send :alias_method, :format_without_var_dump, :format
+      base.send :alias_method, :format, :format_with_var_dump
+    end
+
+    def format_with_var_dump(object, type = nil)
+      core_class = cast(object, type)
+      awesome = if core_class != :self
+        send(:"awesome_#{core_class}", object)
+      else
+        awesome_self(object, type)
+      end
+    end
+  end
+end
+
+AwesomePrint::Formatter.send(:include, AwesomePrint::VarDump)
+
+
