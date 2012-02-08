@@ -10,13 +10,13 @@ Writing now...
 
 rack-var-dumpはphpのvar_dump()のようなデバッグ用のメソッドを提供します
 
-Object Classにvar_dumpメソッドを提供し、レスポンスを返すまでにModel,Controller,View,
+Objectにvar_dumpメソッドを提供し、Rackがレスポンスを返すまでにModel,Controller,View,
 
-その他で実行されたすべてのレシーバーをviewに自動的に出力します
+その他コンテキストで実行されたすべてのレシーバーをviewに自動的に出力します
 
-var_dumpの返り値は常にselfです
+出力には michaeldv / awesome_print を使用しています。
 
-<img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bunnyhop/20120127/20120127235528.png"/>
+<img src="http://cdn-ak.f.st-hatena.com/images/fotolife/b/bunnyhop/20120208/20120208182805.png"/>
 
 ## Supported versions
 
