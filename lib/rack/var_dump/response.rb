@@ -12,12 +12,12 @@ module Rack
         @var_aggregates = VarDump.var_aggregates
       end
 
-
       def _call
         if @headers["Content-Type"] =~ /^text\/html/ && !@var_aggregates.empty?
-          body = ""
-          @response.each {|org_body| body << org_body}
-          @response = [apply(body)] if body =~ /<body.*>/
+          content_body = @response.inject("") do |body, org_body|
+            body << org_body
+          end
+          @response = [apply(content_body)] if content_body =~ /<body.*>/
           @headers["Content-Length"] = @response.join.bytesize.to_s
         end
 
