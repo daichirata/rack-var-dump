@@ -14,7 +14,7 @@ module Rack
       end
 
       def inspect_dump
-        @variable.inspect
+        Rack::Utils.escape_html(@variable.inspect)
       end
       private :inspect
 

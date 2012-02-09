@@ -9,15 +9,17 @@ module Rack
         @status   = status
         @headers  = headers
         @response = response
+        @content_body = ""
         @var_aggregates = VarDump.var_aggregates
       end
 
       def _call
         if @headers["Content-Type"] =~ /^text\/html/ && !@var_aggregates.empty?
-          content_body = @response.inject("") do |body, org_body|
-            body << org_body
+          @response.each do |orign_body|
+            @content_body << orign_body
           end
-          @response = [apply(content_body)] if content_body =~ /<body.*>/
+
+          @response = [apply_content_body] if @content_body =~ /<body.*>/
           @headers["Content-Length"] = @response.join.bytesize.to_s
         end
 
@@ -26,7 +28,7 @@ module Rack
       end
 
       private
-      def apply(body)
+      def apply_content_body
         html = <<-HTML
 <style type="text/css">
 <!--
@@ -52,7 +54,7 @@ var_dump:#{index} #{variable.subject}
         end
 
         html << "</pre></div>"
-        body.sub(/<body.*>/, '\&' + html)
+        @content_body.sub(/<body.*>/, '\&' + html)
       end
     end
   end
