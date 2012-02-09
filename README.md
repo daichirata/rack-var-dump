@@ -73,6 +73,12 @@ var_dumpの返り値は常にselfのため、チェーンが途切れずに使�
 
     @first_name = User.find(3).var_dump('user.id(3)').first_name
 
+引数にハッシュを与えることで、awesome_printのオプションを使用することができます。
+
+    @users.var_dump("user.all")                 #=> 通常出力
+    @users.var_dump("user.all", :plain => true) #=> plain text(obj.inspect)の出力
+    @users.var_dump(:plain => true)             #=> subjectは省略してもok
+
 ## Copyright
 
 Copyright (c) 2012 Daichi Hirata. See LICENSE for details.
