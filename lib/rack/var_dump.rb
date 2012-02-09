@@ -18,7 +18,7 @@ module Rack
     end
 
     def self.var_dump(var, subject, options = {})
-      default = { :html => true, :plain => false }
+      default = { :html => true }
       @@var_aggregates << Variable.new(var, subject, default.merge(options))
     end
 
