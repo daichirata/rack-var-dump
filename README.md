@@ -28,8 +28,6 @@ Objectにvar_dumpメソッドを提供し、Rackがレスポンスを返すま�
 
     $ gem install rack-var-dump
 
-### Rails
-
 Gemfileに追加
 
     gem 'rack-var-dump'
