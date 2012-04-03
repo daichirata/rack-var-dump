@@ -12,7 +12,6 @@ in the context var_dump other methods to provide the Object, to return a respons
 The output uses a michaeldv / awesome_print.
 
 
-
 ## Supported versions
 
 * Ruby 1.8.7, 1.9.x 
@@ -20,13 +19,13 @@ The output uses a michaeldv / awesome_print.
 * Applications that use the Rack (rails, sinatra, padrino, etc...)
 
 
-## Install
+## Instration
 
 Add to Gemfile
 
     gem 'rack-var-dump'
 
-### If more than Rails3.x
+### Rails3.x
 
     require 'rails-var-dump'
 
